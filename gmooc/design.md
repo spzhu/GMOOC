@@ -97,3 +97,42 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 ```
+
+### Xadmin使用
+- model注册与admin基本相同
+- 页面显示的models名称为配置的Meta信息
+- django后台是对表的增删改查，不依赖于业务逻辑
+
+**xadmin参数**
+- list_display,数组类型，设置后台界面要显示的model字段
+- search_fields,数组，在后台界面增加搜索框，检索
+- list_filter,数组，过滤器
+
+**xadmin注册model处理外键的方式**
+> list_filter中使用类似course__name的方式，使用"__"连接外键与外表字段名
+
+#### xadmin全局配置
+**主题设置, title,footer设置**
+```
+from xadmin import views
+
+class BaseSetting:
+    enable_themes = True
+    use_boostwatch = True
+
+
+xadmin.site.register(views.BaseAdminView, BaseSetting)
+```
+
+**修改app中文名**
+在app如Courses文件夹下自动生成的apps.py文件中配置app
+```
+class CoursesConfig(AppConfig):
+    name = "courses"
+    verbose_name = "课程管理"
+```
+修改__init__.py文件，增加
+```
+default_app_config = "courses.apps.CoursesConfig"
+```
+
