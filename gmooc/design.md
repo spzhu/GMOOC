@@ -1,4 +1,4 @@
-# GMOOC 实战设计文档
+# GMOOC 实战学习笔记
 
 ### APP 设计
 
@@ -135,4 +135,20 @@ class CoursesConfig(AppConfig):
 ```
 default_app_config = "courses.apps.CoursesConfig"
 ```
+### 用户注册页面
+
+修改register.html的css等静态文件
+
+**django template语法**
+> 使用static前需要load
+```
+{% load static %}
+href="{% static 'css/reset.css' %}"
+```
+django会根据settings中的STATIC_URL设置自动修改静态文件路径
+
+**验证码插件**
+> django-simple-captcha
+
+
 

@@ -43,3 +43,12 @@ AdminSplitDateTime.render()传入的input_html没有'\n',
     ...
 ```
 
+### CRSF验证失败，禁止访问
+Django的安全机制，为了防止跨域的提交，会进行CSRF token验证
+在form中加入csrf_token
+```
+<form>
+    ...
+    {% csrf_token %}
+</form>
+```
