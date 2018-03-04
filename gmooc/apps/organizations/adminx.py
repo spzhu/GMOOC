@@ -10,9 +10,9 @@ class CityAdmin:
 
 
 class CourseOrgAdmin:
-    list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'city', 'add_time']
-    search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'city']
-    list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'city__name', 'add_time']
+    list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city', 'add_time']
+    search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city']
+    list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city__name', 'add_time']
 
 
 class TeacherAdmin:

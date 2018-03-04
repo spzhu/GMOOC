@@ -17,10 +17,13 @@ Including another URLconf
 import xadmin
 
 # from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from django.views.static import serve
 
+from gmooc import settings
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, PwdResetView, PwdModifyView
+from organizations.views import OrgListView
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -32,4 +35,8 @@ urlpatterns = [
     path('forget/', ForgetPwdView.as_view(), name="forget_pwd"),
     path('reset/<code>', PwdResetView.as_view(), name="reset"),
     path('pwd_reset/', PwdModifyView.as_view(), name="reset_pwd"),
+    path('org_list/', OrgListView.as_view(), name="org_list"),
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
 ]

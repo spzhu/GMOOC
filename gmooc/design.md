@@ -150,5 +150,35 @@ django会根据settings中的STATIC_URL设置自动修改静态文件路径
 **验证码插件**
 > django-simple-captcha
 
+### 机构列表页面
 
+#### 处理ImageField的图片加载
+1. html文档 img标签的data-url="{{ MEDIA_URL }}{ org.image }"
+2. urls.py配置处理media资源的url，要用到django内建函数serve,
+代码参考django文档
+```
+from django.conf import settings
+from django.urls import re_path
+from django.views.static import serve
 
+# ... the rest of your URLconf goes here ...
+
+if settings.DEBUG:
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+            }),
+]
+```
+3. settings配置
+TEMPLATES 的 OPTIONS 添加'django.template.context_processors.media'，使得html中{{ MEDIA_URL }}可用
+
+#### 分页功能
+
+> 第三方库django-pure-pagination
+
+具体使用方法见[github文档](https://github.com/jamespacileo/django-pure-pagination/blob/master/README.rst)
+
+#### 筛选功能
+
+model中的外键在数据库中是以_id后缀形式存储字段的，如外键city在数据表中字段为city_id,可以直接使用city_id做filter
