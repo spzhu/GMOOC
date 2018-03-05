@@ -23,7 +23,6 @@ from django.views.static import serve
 
 from gmooc import settings
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, PwdResetView, PwdModifyView
-from organizations.views import OrgListView
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -35,7 +34,7 @@ urlpatterns = [
     path('forget/', ForgetPwdView.as_view(), name="forget_pwd"),
     path('reset/<code>', PwdResetView.as_view(), name="reset"),
     path('pwd_reset/', PwdModifyView.as_view(), name="reset_pwd"),
-    path('org_list/', OrgListView.as_view(), name="org_list"),
+    path('org/', include('organizations.urls', namespace='org')),
     re_path(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
     }),

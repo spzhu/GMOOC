@@ -12,7 +12,6 @@
     {% block custom_css %}{% endblock %}
     <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
-    {% block custom_js %}{% endblock %}
   </head>
   <body>
 
@@ -25,13 +24,16 @@
     {% block content %}
     {% endblock %}
 
+    {% block custom_js %}
+    {% endblock %}
+
     <footer>
       <div class="footer">
         <div class="wp">
           <ul class="cont">
-            <li class="logo"><a href=""><img src="../images/footlogo.png"/></a></li>
-            <li class="code"><img src="../images/code.jpg"/><p class="center">扫描关注微信</p></li>
-            <li class="third"><img class="fl" src="../images/tell.png"/><p class="tell">33333333</p><p class="time">周一至周日 9:00-18:00</p></li>
+              <li class="logo"><a href=""><img src="{% static 'images/footlogo.png' %}"/></a></li>
+              <li class="code"><img src="{% static 'images/code.jpg' %}"/><p class="center">扫描关注微信</p></li>
+              <li class="third"><img class="fl" src="{% static 'images/tell.png' %}"/><p class="tell">33333333</p><p class="time">周一至周日 9:00-18:00</p></li>
           </ul>
 
         </div>
@@ -59,29 +61,6 @@
     <script src="{% static 'js/unslider.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/plugins/jquery.scrollLoading.js' %}"  type="text/javascript"></script>
     <script src="{% static 'js/deco-common.js' %}"  type="text/javascript"></script>
-
-    <script>
-      $(function(){
-        $('#jsStayBtn').on('click', function(){
-          $.ajax({
-            cache: false,
-            type: "POST",
-            url:"/org/add_ask/",
-            data:$('#jsStayForm').serialize(),
-            async: true,
-            success: function(data) {
-              if(data.status == 'success'){
-                $('#jsStayForm')[0].reset();
-                alert("提交成功")
-              }else if(data.status == 'fail'){
-                $('#jsCompanyTips').html(data.msg)
-              }
-            },
-          });
-        });
-      })
-
-    </script>
 
   </body>
 </html>

@@ -52,3 +52,35 @@ Django的安全机制，为了防止跨域的提交，会进行CSRF token验证
     {% csrf_token %}
 </form>
 ```
+
+### urls分发，include
+
+> include()namespace报错Specifying a namespace in include() without providing an app_name
+
+python3 Django 环境下，如果namespace没有注册以及在根目录下urls.py中的include方法的第二个参数namespace添加之后就出错的问题。
+需要在[app_name]目录下的urls.py中的urlpatterns前面加上app_name='[app_name]'， [app_name]代表应用的名称。
+
+django文档示例:
+
+urls.py
+```
+from django.urls import include, path
+
+urlpatterns = [
+    path('author-polls/', include('polls.urls', namespace='author-polls')),
+    path('publisher-polls/', include('polls.urls', namespace='publisher-polls')),
+]
+```
+polls/urls.py
+```
+from django.urls import path
+
+from . import views
+
+app_name = 'polls'
+urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    ...
+]
+```

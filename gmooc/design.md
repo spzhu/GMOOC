@@ -182,3 +182,28 @@ TEMPLATES 的 OPTIONS 添加'django.template.context_processors.media'，使得h
 #### 筛选功能
 
 model中的外键在数据库中是以_id后缀形式存储字段的，如外键city在数据表中字段为city_id,可以直接使用city_id做filter
+
+#### ModelForm
+
+可以指定相应Model的某些字段生成Form，并且可以对字段进行合法性判断
+```
+class UserAskForm(forms.ModelForm):
+    class Meta:
+        model = UserAsk
+        fields = [...]
+```
+UserAskModel继承django的ModelForm,ModelForm可以定义Meta类，model参数指定Model类，fields参数指定转换为form的字段。
+
+**验证字段是否合法**
+
+定义clean_开头的方法，clean_+字段名，使用内置的cleaned_data提取字段值，进行验证。
+```
+def clean_mobile(self):
+    mobile = self.cleaned_data['mobile']
+    reg_mobile = '^1[3|4|5|7|8][0-9]{9}$'
+    reg = re.compile(reg_mobile)
+    if reg.match(mobile):
+        return mobile
+    else:
+        raise forms.ValidationError("手机号码非法", code="invalid mobile")
+```

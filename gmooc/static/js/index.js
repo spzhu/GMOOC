@@ -19,11 +19,11 @@ $(function() {
     });
 
     var unslider2 = $('.imgslide2').unslider({
-		speed: 500,              
-		complete: function() {},  
-		keys: true,               
-		dots: false,              
-		fluid: false             
+		speed: 500,
+		complete: function() {},
+		keys: true,
+		dots: false,
+		fluid: false
 	});
     $('.unslider-arrow2').click(function() {
         var fn = this.className.split(' ')[1];
@@ -31,12 +31,12 @@ $(function() {
     });
 
     var unslider3 = $('.imgslide3').unslider({
-		speed: 500,              
-		delay: 3000,             
-		complete: function() {}, 
-		keys: true,               
-		dots: true,              
-		fluid: false             
+		speed: 500,
+		delay: 3000,
+		complete: function() {},
+		keys: true,
+		dots: true,
+		fluid: false
 	});
     $('.unslider-arrow3').click(function() {
         var fn = this.className.split(' ')[1];
@@ -44,12 +44,12 @@ $(function() {
     });
 
     var unslider4 = $('.imgslide4').unslider({
-		speed: 500,               
-		delay: 3000,             
-		complete: function() {}, 
-		keys: true,               
-		dots: true,             
-		fluid: false             
+		speed: 500,
+		delay: 3000,
+		complete: function() {},
+		keys: true,
+		dots: true,
+		fluid: false
 	});
     $('.unslider-arrow4').click(function() {
         var fn = this.className.split(' ')[1];
@@ -57,12 +57,12 @@ $(function() {
     });
 
     var unslider5 = $('.imgslide5').unslider({
-		speed: 500,              
-		delay: 3000,              
-		complete: function() {},  
-		keys: true,               
-		dots: false,               
-		fluid: false             
+		speed: 500,
+		delay: 3000,
+		complete: function() {},
+		keys: true,
+		dots: false,
+		fluid: false
 	});
     $('.unslider-arrow5').click(function() {
         var fn = this.className.split(' ')[1];

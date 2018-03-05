@@ -32,7 +32,7 @@ class CourseOrg(models.Model):
     fav_nums = models.IntegerField(default=0, verbose_name="收藏量")
     students = models.IntegerField(default=0, verbose_name="学习人数")
     courses = models.IntegerField(default=0, verbose_name="课程数")
-    image = models.ImageField(upload_to="organizations/%Y/%m", verbose_name="logo")
+    image = models.ImageField(upload_to="teachers/%Y/%m", verbose_name="头像", null=True, blank=True)
     address = models.CharField(max_length=150, verbose_name="机构地址")
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name="城市")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
@@ -49,8 +49,9 @@ class Teacher(models.Model):
     """
     教师信息
     """
-    org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name="所属机构")
     name = models.CharField(max_length=50, verbose_name="教师名")
+    org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name="所属机构")
+    image = models.ImageField(upload_to="organizations/%Y/%m", verbose_name="logo")
     work_years = models.IntegerField(default=0, verbose_name="工作年限")
     work_company = models.CharField(max_length=100, verbose_name="就职公司")
     work_positon = models.CharField(max_length=100, verbose_name="公司职位")

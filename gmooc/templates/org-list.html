@@ -13,12 +13,8 @@
                 <div class="wp">
                     <div class="fl"><p>服务电话：<b>33333333</b></p></div>
                     <!--登录后跳转-->
-
-
                     <a style="color:white" class="fr registerbtn" href="register.html">注册</a>
                     <a style="color:white" class="fr loginbtn" href="login.html">登录</a>
-
-
                 </div>
             </div>
 
@@ -54,7 +50,7 @@
                             <li >
                                 <a href="teachers-list.html">授课教师</a>
                             </li>
-                            <li class="active" ><a href="org-list.html">授课机构</a></li>
+                            <li class="active" ><a href="{% url 'org:org_list' %}">授课机构</a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,6 +70,33 @@
         </ul>
     </div>
 </section>
+{% endblock %}
+
+{% block custom_js %}
+<script>
+    $(function(){
+        $('#jsStayBtn').on('click', function(){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url 'org:add_ask' %}",
+                data:$('#jsStayForm').serialize(),
+                async: true,
+                success: function(data) {
+                    console.log(data)
+                    if(data.status == 'success'){
+                        $('#jsStayForm')[0].reset();
+                        alert("提交成功")
+                    }else if(data.status == 'fail'){
+                        $('#jsCompanyTips').html(data.msg)
+                    }
+                },
+            });
+        });
+    })
+
+</script>
+
 {% endblock %}
 
 
@@ -133,13 +156,13 @@
                     {% for org in all_orgs.object_list %}
                     <dl class="des difdes">
                         <dt>
-                        <a href="org-detail-homepage.html">
+                        <a href="{% url 'org:org_home' org.id %}">
                             <img width="200" height="120" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ org.image }}"/>
                         </a>
                         </dt>
                         <dd>
                         <div class="clearfix">
-                            <a href="org-detail-homepage.html">
+                            <a href="{% url 'org:org_home' org.id %}">
                                 <h1>{{ org.name }}</h1>
                                 <div class="pic fl">
                                     <img src="{% static 'images/authentication.png' %}"/>
@@ -186,11 +209,6 @@
                         {% if all_orgs.has_next %}
                             <li class="long"><a href="?{{ all_orgs.previous_page_number.querystring }}">上一页</a></li>
                         {% endif %}
-                        <!-- <li class="active"><a href="?page=1">1</a></li> -->
-                        <!-- <li><a href="?page=2" class="page">2</a></li> -->
-                        <!-- <li><a href="?page=3" class="page">3</a></li> -->
-                        <!-- <li class="long"><a href="?page=2">下一页</a></li> -->
-
                     </ul>
                 </div>
             </div>
@@ -199,7 +217,7 @@
             <div class="head">我要学习</div>
             <form class="rightform" id="jsStayForm">
                 <div>
-                    <img src="{% static 'images/rightform1.png' %]"/>
+                    <img src="{% static 'images/rightform1.png' %}"/>
                     <input type="text" name="name" id="companyName" placeholder="名字" maxlength="25" />
                 </div>
                 <div>
@@ -212,7 +230,7 @@
                 </div>
                 <p class="error company-tips" id="jsCompanyTips"></p>
                 <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >" />
-                <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
+                {% csrf_token %}
             </form>
         </div>
 
