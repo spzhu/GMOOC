@@ -28,7 +28,7 @@ SECRET_KEY = ')9mskryfr-q#9ckni_t&ea_w-=hf=+r(&1k9@c246^*a*x@6ex'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -162,3 +162,5 @@ EMAIL_FROM = '13070181077@163.com'
 # 资源文件配置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')

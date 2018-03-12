@@ -248,3 +248,56 @@ django.db.models class Q 在检索或(|)、与(&)用于连接条件
 - 修改头像，使用新的View post方法
 - 上传的文件位于request.FILES
 
+### 404和500页面
+
+在urls.py配置handler404、handler500
+定义404和500的处理方法
+
+```
+handler404 = 'users.views.page_not_found'
+handler500 = 'users.views.internal_error'
+```
+
+```
+def page_not_found(request):
+    response = render_to_response('404.html')
+    response.status_code = 404
+    return response
+```
+> 注：hanler404与handler500的默认处理函数的template_name='404.html'和'500.html',只需将配置好的html文件改名为404.html和500.html,放在templates文件夹即可调用
+
+DEBUG由True修改为False之后，django服务器不会再做静态文件的代理，不会再从配置的STATIC地址寻找静态文件
+可以在settings自己指定STATIC_ROOT
+```
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+
+### 网络安全
+
+#### sql注入攻击
+
+在用户输入的内容插入特殊字符，构造SQL语句进行sql注入攻击
+
+#### xss攻击
+
+> 跨站脚本攻击(Cross Site Scripting)
+
+在用户访问的url中插入js脚本，执行脚本获取用户Cookie等信息
+
+**防护**
+
+- 对用户的输入进行长度和特殊字符的过滤
+- 避免直接在cookie中泄露用户隐私
+- 通过使cookie和ip绑定的方式来降低cookie泄露后的危险
+- 尽量采用POST而非GET提交表单
+
+#### csrf攻击
+> 跨站请求伪造(Cross-site request forgery)
+
+用户在访问服务器A的同时，访问了危险服务器B，B返回的html中带有一个指向A的url，比如一张图片的src设置了指向A的url请求，
+使得用户浏览器携带访问A的seeionid去访问A，这样就进行了跨站请求伪造
+
+### Xadmin进阶开发
+
+
+

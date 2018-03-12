@@ -44,4 +44,11 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
     }),
+    # re_path(r'^static/(?P<path>.*)$', serve, {
+        # 'document_root': settings.STATIC_ROOT,
+    # }),
 ]
+
+# 默认处理函数的template_name为404.html 和 500.html，只需配置html文件
+# handler404 = 'users.views.not_found_page'
+# handler500 = 'users.views.internal_error'
