@@ -22,7 +22,7 @@ class UserProfile(AbstractUser):
 
     def get_unread_msg_nums(self):
         from operations.models import UserMessage
-        return UserMessage.objects.filter(user=self.id).count()
+        return UserMessage.objects.filter(user=self.id, has_read=False).count()
 
 
 class EmailVerifyRecord(models.Model):
@@ -52,3 +52,6 @@ class Banner(models.Model):
     class Meta:
         verbose_name = "轮播图"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title

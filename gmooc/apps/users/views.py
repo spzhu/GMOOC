@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from organizations.models import Teacher, CourseOrg
 from courses.models import Course
 from operations.models import UserCourse, UserFavorite, UserMessage
-from .models import UserProfile, EmailVerifyRecord
+from .models import UserProfile, EmailVerifyRecord, Banner
 from .forms import LoginForm, RegisterForm, ForgetForm, PwdResetForm, UploadImageForm, UserInfoForm
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
@@ -250,6 +250,10 @@ class MyFavView(LoginRequiredMixin, View):
 class MyMessageView(LoginRequiredMixin, View):
     def get(self, request):
         all_messages = UserMessage.objects.filter(user=request.user.id)
+        unread_messages = UserMessage.objects.filter(user=request.user.id, has_read=False)
+        for unread_msg in unread_messages:
+            unread_msg.has_read = True
+            unread_msg.save()
         return render(request, "usercenter-message.html", {
             "all_messages": all_messages,
             "current_page": 'message',
@@ -258,4 +262,13 @@ class MyMessageView(LoginRequiredMixin, View):
 
 class IndexView(View):
     def get(self, request):
-        return render(request, "index.html", {})
+        all_banners = Banner.objects.all().order_by("index")[:5]
+        banner_courses = Course.objects.filter(is_banner=True)[:3]
+        courses = Course.objects.filter(is_banner=False)[:6]
+        orgs = CourseOrg.objects.all()[:15]
+        return render(request, "index.html", {
+            "all_banners": all_banners,
+            "banner_courses": banner_courses,
+            "courses": courses,
+            "orgs": orgs,
+        })
