@@ -47,7 +47,7 @@ class UserMessage(models.Model):
     一种是发给指定用户，另一种是系统发给所有用户
     """
     user = models.IntegerField(default=0, verbose_name="接收用户")
-    messaage = models.CharField(max_length=500, verbose_name="消息内容")
+    message = models.CharField(max_length=500, verbose_name="消息内容")
     has_read = models.BooleanField(default=False, verbose_name="是否已读")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 

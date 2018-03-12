@@ -20,12 +20,17 @@ class UserProfile(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_unread_msg_nums(self):
+        from operations.models import UserMessage
+        return UserMessage.objects.filter(user=self.id).count()
+
 
 class EmailVerifyRecord(models.Model):
     code = models.CharField(max_length=20, verbose_name="验证码")
     email = models.EmailField(max_length=100, verbose_name="邮箱")
     # send_type区别注册和找回密码的区别
-    send_type = models.CharField(verbose_name="验证码类型", max_length=10, choices=(("register", "注册"), ("forget", "找回密码")))
+    send_type = models.CharField(verbose_name="验证码类型", max_length=30,
+                                 choices=(("register", "注册"), ("forget", "找回密码"), ("modify_email", "修改邮箱")))
     # datetime.now获得class实例化时的时间
     send_time = models.DateTimeField(default=datetime.now, verbose_name="发送时间")
 

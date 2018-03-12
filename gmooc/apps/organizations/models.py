@@ -44,6 +44,12 @@ class CourseOrg(models.Model):
     def __str__(self):
         return self.name
 
+    def get_course_nums(self):
+        return self.course_set.all().count()
+
+    def get_teacher_nums(self):
+        return self.teacher_set.all().count()
+
 
 class Teacher(models.Model):
     """
@@ -54,7 +60,7 @@ class Teacher(models.Model):
     image = models.ImageField(upload_to="organizations/%Y/%m", verbose_name="logo")
     work_years = models.IntegerField(default=0, verbose_name="工作年限")
     work_company = models.CharField(max_length=100, verbose_name="就职公司")
-    work_positon = models.CharField(max_length=100, verbose_name="公司职位")
+    work_position = models.CharField(max_length=100, verbose_name="公司职位")
     feature = models.CharField(max_length=100, verbose_name="教学特点", default="")
     click_nums = models.IntegerField(default=0, verbose_name="点击量")
     fav_nums = models.IntegerField(default=0, verbose_name="收藏量")
@@ -66,3 +72,6 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_course_nums(self):
+        return self.course_set.all().count()

@@ -84,3 +84,10 @@ urlpatterns = [
     ...
 ]
 ```
+### models.Charfield的choice展示值
+
+>  degree = models.CharField(max_length=10, choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")), verbose_name="课程难度")
+
+在template中course.degree会显示在数据库中存储的内容，即cj,zj,gj,若要显示初级，中级，高级，
+使用get_\[字段\]_display方法，如get_degree_display,是专门针对choice的用法
+

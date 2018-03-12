@@ -10,19 +10,19 @@ class CourseAdmin:
 
 
 class LessonAdmin:
-    list_display = ['course', 'name', 'add_time']
+    list_display = ['name', 'course', 'add_time']
     search_fields = ['course', 'name']
     list_filter = ['course__name', 'name', 'add_time']
 
 
 class VideoAdmin:
-    list_display = ['lesson', 'name', 'add_time']
+    list_display = ['name', 'lesson', 'add_time']
     search_fields = ['lesson', 'name']
     list_filter = ['lesson__name', 'name', 'add_time']
 
 
 class CourseResourceAdmin:
-    list_display = ['course', 'name', 'add_time']
+    list_display = ['name', 'course', 'add_time']
     search_fields = ['course', 'name']
     list_filter = ['course__name', 'name', 'add_time']
 

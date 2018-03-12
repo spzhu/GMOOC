@@ -207,3 +207,44 @@ def clean_mobile(self):
     else:
         raise forms.ValidationError("手机号码非法", code="invalid mobile")
 ```
+
+### 课程页面
+
+**学习过该课程的用户还学过哪些课**
+
+通过UserCourse获取到学习该课程的user_ids列表，使用user_id__in=user_ids传入id列表，查询所有在id列表的UserCourse
+同样的方法查询到全部关联课程
+
+通过view实现登录权限的认证, 自定义LoginView
+
+```
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+class LoginRequiredMixin:
+
+    @method_decorator(login_required(login_url='/login/'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+```
+
+需要权限认证的View继承LoginRequiredMixin，View
+
+```
+class CourseLessonView(LoginRequiredMixin, View):
+    ...
+```
+
+### 首页
+
+#### 搜索功能
+
+name__icontains=keyword, __icontains表示django model会转化为LIKE的SQL语句
+django.db.models class Q 在检索或(|)、与(&)用于连接条件
+
+### 个人页面
+
+- 修改头像，使用新的View post方法
+- 上传的文件位于request.FILES
+
