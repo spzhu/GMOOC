@@ -47,6 +47,8 @@ urlpatterns = [
     # re_path(r'^static/(?P<path>.*)$', serve, {
         # 'document_root': settings.STATIC_ROOT,
     # }),
+
+    path('ueditor/', include('DjangoUeditor.urls'))
 ]
 
 # 默认处理函数的template_name为404.html 和 500.html，只需配置html文件

@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 from organizations.models import CourseOrg, Teacher
 # Create your models here.
@@ -15,7 +16,8 @@ class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name="课程名")
     is_banner = models.BooleanField(default=False, verbose_name="是否轮播")
     desc = models.CharField(max_length=100, verbose_name="课程描述")
-    detail = models.TextField(verbose_name="课程详情")
+    detail = UEditorField(verbose_name="课程详情", width=600, height=300, toolbars="full", imagePath="courses/ueditor/",
+                          filePath="courses/ueditor/", default="", upload_settings={"imageMaxSize": 1204000})
     category = models.CharField(max_length=100, verbose_name="课程类型", default="后端开发")
     tag = models.CharField(max_length=100, verbose_name="课程标签", default="python")
     degree = models.CharField(max_length=10, choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")), verbose_name="课程难度")
@@ -40,6 +42,14 @@ class Course(models.Model):
 
     def get_course_lessons(self):
         return self.lesson_set.all()
+
+
+class BannerCourse(Course):
+    class Meta:
+        verbose_name = "轮播课程"
+        verbose_name_plural = verbose_name
+        # proxy参数设置为True，不会再生成第二张表
+        proxy = True
 
 
 class Lesson(models.Model):

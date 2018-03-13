@@ -30,8 +30,8 @@
       <div class="wp">
         <div class="crumbs">
           <ul>
-            <li><a href="index.html">首页</a>></li>
-            <li><a href="course-list.html">公开课程</a>></li>
+              <li><a href="{% url 'index' %}">首页</a>></li>
+              <li><a href="{% url 'course:course_list' %}">公开课程</a>></li>
             <li>课程详情</li>
           </ul>
         </div>
@@ -146,7 +146,11 @@
               <p>
               <img src="{{ MEDIA_URL }}{{ course.image }}" title="" alt="aobama.png"/>
               </p>
-              <p>&nbsp; &nbsp; {{ course.detail }}</p>
+              <p>&nbsp; &nbsp;
+              {% autoescape off %}
+              {{ course.detail }}
+              {% endautoescape %}
+              </p>
 
             </div>
             <div class="tab_cont tab_cont2" >

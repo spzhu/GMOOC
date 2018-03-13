@@ -13,6 +13,8 @@ class CourseOrgAdmin:
     list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city', 'add_time']
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city']
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city__name', 'add_time']
+    # 当有外键的时候以ajax加载的方式显示数据，防止数据量过大，下拉菜单过长
+    relfield_style = 'fk_ajax'
 
 
 class TeacherAdmin:

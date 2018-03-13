@@ -299,5 +299,81 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ### Xadmin进阶开发
 
+#### 常用功能
+
+- 修改默认排序 ordering=[]
+- 设置只读字段 readonly_fields=[]
+- 设置不显示的字段 exclude=[]
+- 在显示列表增加修改功能list_editable=[]
+- 设置每隔多长时间(秒)刷新refresh_times = [3, 5]
+- 一个界面增加两种model数据，外键适用inlines=[LessonInline]
+
+```
+class LessonInline:
+    model = Lesson
+    extra = 0
+```
+
+过滤数据
+
+```
+def queryset(self):
+    qs = super(CourseAdmin, self).queryset()
+    qs = qs.filter(is_banner=False)
+    return qs
+```
+
+统计保存model信息
+
+```
+def save_models(self):
+    obj = self.new_obj  # 取到当前实例
+    obj.save()
+    if obj.course_org:
+    course_org = obj.course_org
+    course_org.courses = Course.objects.filter(course_org=course_org).count()
+    course_org.save()
+```
+
+#### 富文本集成
+
+> 插件DjangoUeditor
+
+1.  安装DjangoUeditor for Django2[github](https://github.com/zhangfisher/DjangoUeditor)
+2.  在settings配置INSTALLED_APPS
+    ```
+    INSTALLED_APPS = [
+        'DjangoUeditor'
+    ]
+    ```
+3.  在model中导入UEditorField
+    ```
+    from DjangoUeditor.models import UEditorField
+    ...
+
+
+    detail = UEditorField(verbose_name="课程详情", width=600, height=300, toolbars="full", imagePath="courses/ueditor/",
+                          filePath="courses/ueditor/", default="", upload_settings={"imageMaxSize": 1204000})
+    ```
+4.  在xadmin的plugins文件增加ueditor文件,在xadmin的plugins包的__init__.py文件的PLUGINS参数增加ueditor插件
+    ```
+    PLUGINS = (
+        ...
+        'ueditor'
+    )
+    ```
+5.  在adminx.py注册的Admin类添加字段style设置style_fields
+    ```
+    class CourseAdmin:
+        ...
+        style_fields = {'detail': 'ueditor'}
+    ```
+6.  template文件显示富文本的地方关闭自动转义
+    ```
+    {% autoescape off %}
+    ...
+    {% endautoescape %}
+    ```
+
 
 
