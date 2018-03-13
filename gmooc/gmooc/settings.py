@@ -17,7 +17,6 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 sys.path.insert(0, os.path.join(BASE_DIR, "extra_apps"))
-sys.path.append(os.path.join(BASE_DIR, "extra_apps/DjangoUeditor"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -106,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gmooc',
         'USER': 'root',
-        'PASSWORD': '931206',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
     }
 }
@@ -149,9 +148,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+# STATICFILES_DIRS = [
+    # os.path.join(BASE_DIR, "static"),
+# ]
 
 # 邮件发送设置信息
 EMAIL_HOST = 'smtp.163.com'
@@ -165,4 +164,4 @@ EMAIL_FROM = '13070181077@163.com'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
