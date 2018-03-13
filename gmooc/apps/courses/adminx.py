@@ -23,6 +23,7 @@ class CourseAdmin:
     inlines = [LessonInline, CourseResourceInline]
     list_editable = ['degree']
     style_fields = {'detail': 'ueditor'}
+    import_excel = True
 
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()
@@ -37,6 +38,11 @@ class CourseAdmin:
             course_org = obj.course_org
             course_org.courses = Course.objects.filter(course_org=course_org).count()
             course_org.save()
+
+    def post(self, request, *args, **kwargs):
+        if 'excel' in request.FILES:
+            pass
+        return super().post(request, *args, **kwargs)
 
 
 class BannerCourseAdmin:
