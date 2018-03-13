@@ -1,12 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 from django import VERSION
-if VERSION[0:2]>(1,9):
-    from django.urls import re_path
-else:
-    pass
-
-from views import get_ueditor_controller
+from .widgets import UEditorWidget, AdminUEditorWidget
+from .views import get_ueditor_controller
+from django.conf.urls import url
 
 urlpatterns = [
-    re_path(r'^controller/$', get_ueditor_controller),
+    url(r'^controller/$', get_ueditor_controller),
 ]
