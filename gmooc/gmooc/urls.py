@@ -16,7 +16,7 @@ Including another URLconf
 
 import xadmin
 
-# from django.contrib import admin
+from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 
@@ -24,6 +24,7 @@ from gmooc import settings
 from users.views import IndexView, LoginView, LogoutView, RegisterView, ActiveUserView, ForgetPwdView, PwdResetView, PwdModifyView
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('xadmin/', xadmin.site.urls),
     path('', IndexView.as_view(), name="index"),
     path('login/', LoginView.as_view(), name="login"),
