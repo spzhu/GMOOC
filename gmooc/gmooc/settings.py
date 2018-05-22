@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, "extra_apps"))
 SECRET_KEY = ')9mskryfr-q#9ckni_t&ea_w-=hf=+r(&1k9@c246^*a*x@6ex'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -106,7 +106,8 @@ DATABASES = {
         'NAME': 'gmooc',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'HOST': '13.125.15.159',
+        'PORT': 3306,
     }
 }
 
