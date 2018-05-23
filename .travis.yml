@@ -1,6 +1,9 @@
 language: python
 python:
 - '3.6'
+branches:
+    only:
+    - master
 env:
 - DJANGO=2.0
 install:
