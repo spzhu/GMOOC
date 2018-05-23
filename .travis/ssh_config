@@ -1,5 +1,5 @@
 Host 13.125.15.159
     User ubuntu
     StrictHostKeyChecking no
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/id_rsa_deploy.pub
     IdentitiesOnly yes
