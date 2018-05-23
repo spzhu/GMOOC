@@ -1,4 +1,5 @@
 # GMOOC
+[![Build Status](https://www.travis-ci.org/spzhu/GMOOC.svg?branch=master)](https://www.travis-ci.org/spzhu/GMOOC)
 
 慕课网实战课程
 
