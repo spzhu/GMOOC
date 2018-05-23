@@ -108,6 +108,11 @@ DATABASES = {
         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
         'HOST': '13.125.15.159',
         'PORT': 3306,
+        'TEST': {
+            'NAME': 'test_gmooc',
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci',
+        },
     }
 }
 
