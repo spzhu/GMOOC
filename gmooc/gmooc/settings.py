@@ -110,8 +110,6 @@ DATABASES = {
         'PORT': 3306,
         'TEST': {
             'NAME': 'test_gmooc',
-            'CHARSET': 'utf8',
-            'COLLATION': 'utf8_general_ci',
         },
     }
 }
