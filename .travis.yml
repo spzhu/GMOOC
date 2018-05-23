@@ -22,4 +22,4 @@ before_install:
 addons:
     ssh_known_hosts: 13.125.15.159
 after_success:
-- ssh ubuntu@13.125.15.159 < run.sh
+- ssh -tt ubuntu@13.125.15.159 < run.sh
