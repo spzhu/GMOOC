@@ -17,8 +17,6 @@ before_install:
   -in id_rsa_deploy.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
   # - cp .travis/ssh_config ~/.ssh/config
-- export MYSQL_USER=$MYSQL_USER
-- export MYSQL_PASSWORD=$MYSQL_PASSWORD
 addons:
     ssh_known_hosts: 13.125.15.159
 after_success:
