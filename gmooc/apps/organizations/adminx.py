@@ -18,9 +18,9 @@ class CourseOrgAdmin:
 
 
 class TeacherAdmin:
-    list_display = ['name', 'org', 'work_years', 'work_company', 'work_positon', 'feature', 'click_nums', 'fav_nums', 'add_time']
-    search_fields = ['org', 'name', 'work_years', 'work_company', 'work_positon', 'feature']
-    list_filter = ['org__name', 'name', 'work_years', 'work_company', 'work_positon', 'feature', 'click_nums', 'fav_nums', 'add_time']
+    list_display = ['name', 'org', 'work_years', 'work_company', 'work_position', 'feature', 'click_nums', 'fav_nums', 'add_time']
+    search_fields = ['org', 'name', 'work_years', 'work_company', 'work_position', 'feature']
+    list_filter = ['org__name', 'name', 'work_years', 'work_company', 'work_position', 'feature', 'click_nums', 'fav_nums', 'add_time']
 
 
 xadmin.site.register(City, CityAdmin)
