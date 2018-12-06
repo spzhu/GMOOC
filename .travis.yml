@@ -18,6 +18,6 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
   # - cp .travis/ssh_config ~/.ssh/config
 addons:
-    ssh_known_hosts: 13.125.15.159
+    ssh_known_hosts: 123.123.123.123
 after_success:
-- ssh -tt ubuntu@13.125.15.159 < run.sh
+- ssh -tt ubuntu@123.123.123.123 < run.sh
